@@ -46,14 +46,25 @@ If you want to learn more about building native executables, please consult http
 
 ## Os passos para o desenvolvimento do projeto
 
-1. OK - CRUD de produtos com chamadas que bloqueiam durante a gravação e leitura de dados (imperativo).
-2. OK - O mesmo CRUD, mas sem bloquear, realizando as chamadas em outra thread (reativo).
-3. CRUD reativo e usando DTO como parâmetros na camada web.
-4. Uso do padrão Repository ao invés do Active Record.
-5. Testes unitários.
-6. Validações.
-7. Chamada da API que verifica preços online.
-8. Documentação de acordo com a OpenAPI.
-9. Monitoramento.
-10. Fazer as implementações caso o comando falhe (onFailure).
+[x] CRUD de produtos com chamadas que bloqueiam durante a gravação e leitura de dados (imperativo).
+
+[x] O mesmo CRUD, mas sem bloquear, realizando as chamadas em outra thread (reativo).
+
+[x] CRUD reativo e usando DTO como parâmetros na camada web.
+
+[x] Tratamento de exceções com ExceptionMapper.
+
+[ ] Uso do padrão Repository ao invés do Active Record.
+
+[ ] Testes unitários.
+
+[ ] Validações.
+
+[ ] Chamada da API que verifica preços online.
+
+[ ] Documentação de acordo com a OpenAPI.
+
+[ ] Monitoramento.
+
+[ ] Fazer as implementações caso o comando falhe (onFailure).
 

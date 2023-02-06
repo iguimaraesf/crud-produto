@@ -19,24 +19,24 @@ public class ProdutoController {
     }
 
     @GET
-    public Uni<List<Produto>> listar(@QueryParam("page") @DefaultValue("0") int pagina, @QueryParam("size") @DefaultValue("20") int tamanho) {
+    public Uni<List<ProdutoComIdDto>> listar(@QueryParam("page") @DefaultValue("0") int pagina, @QueryParam("size") @DefaultValue("20") int tamanho) {
         return service.listar(pagina, tamanho);
     }
 
     @POST
-    public Uni<?> incluirOuAtualizar(Produto dto) {
+    public Uni<ProdutoComIdDto> incluirOuAtualizar(ProdutoDto dto) {
         return service.incluirOuAlterar(dto);
     }
 
     @GET
     @Path("/{id}")
-    public Uni<Produto> ler(@PathParam("id") String id) {
+    public Uni<ProdutoComIdDto> ler(@PathParam("id") String id) {
         return service.ler(id);
     }
 
     @PUT
     @Path("/{id}")
-    public Uni<?> alterarPorId(@PathParam("id") String id, Produto dto) {
+    public Uni<ProdutoComIdDto> alterarPorId(@PathParam("id") String id, ProdutoDto dto) {
         return service.alterar(id, dto);
     }
 
@@ -48,7 +48,7 @@ public class ProdutoController {
 
     @GET
     @Path("/nome/{nome}")
-    public Uni<List<Produto>> listarPorNome(@PathParam("nome") String nome, @QueryParam("page") int pagina, @QueryParam("size") int tamanho) {
+    public Uni<List<ProdutoComIdDto>> listarPorNome(@PathParam("nome") String nome, @QueryParam("page") int pagina, @QueryParam("size") int tamanho) {
         return service.lerPorNome(nome, pagina, tamanho);
     }
 
