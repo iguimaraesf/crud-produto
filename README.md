@@ -1,12 +1,9 @@
-# produto Project
+# Projeto: cadastro de produtos
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
-
+Este projeto usa o framework reativo Quarkus. O propósito é armazenar em núvem o cadastro de produtos de forma moderna e performática.
 ## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
+Para executar em desenvolvimento:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
@@ -15,7 +12,7 @@ You can run your application in dev mode that enables live coding using:
 
 ## Packaging and running the application
 
-The application can be packaged using:
+O empacotamento deve ser assim:
 ```shell script
 ./mvnw package
 ```
@@ -33,7 +30,7 @@ The application, packaged as an _über-jar_, is now runnable using `java -jar ta
 
 ## Creating a native executable
 
-You can create a native executable using: 
+Para empacotar em modo nativo: 
 ```shell script
 ./mvnw package -Pnative
 ```
@@ -47,21 +44,16 @@ You can then execute your native executable with: `./target/produto-1.0.0-SNAPSH
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Related Guides
+## Os passos para o desenvolvimento do projeto
 
-- SmallRye Reactive Messaging - Kafka Connector ([guide](https://quarkus.io/guides/kafka-reactive-getting-started)): Connect to Kafka with Reactive Messaging
+1. OK - CRUD de produtos com chamadas que bloqueiam durante a gravação e leitura de dados (imperativo).
+2. OK - O mesmo CRUD, mas sem bloquear, realizando as chamadas em outra thread (reativo).
+3. CRUD reativo e usando DTO como parâmetros na camada web.
+4. Uso do padrão Repository ao invés do Active Record.
+5. Testes unitários.
+6. Validações.
+7. Chamada da API que verifica preços online.
+8. Documentação de acordo com a OpenAPI.
+9. Monitoramento.
+10. Fazer as implementações caso o comando falhe (onFailure).
 
-## Provided Code
-
-### Reactive Messaging codestart
-
-Use SmallRye Reactive Messaging
-
-[Related Apache Kafka guide section...](https://quarkus.io/guides/kafka-reactive-getting-started)
-
-
-### RESTEasy Reactive
-
-Easily start your Reactive RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

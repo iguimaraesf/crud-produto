@@ -1,8 +1,14 @@
 package com.inavan.cadastro.entidade.produto;
 
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.PanacheQuery;
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import io.quarkus.mongodb.panache.reactive.ReactivePanacheMongoEntity;
+import io.quarkus.mongodb.panache.reactive.ReactivePanacheQuery;
+import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
+import lombok.ToString;
 import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
@@ -11,7 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 @MongoEntity
-public class Produto extends PanacheMongoEntity {
+@ToString
+public class Produto extends ReactivePanacheMongoEntity {
     public ObjectId id;
     public String nome;
     public Double pesoEmGramas;
@@ -28,23 +35,25 @@ public class Produto extends PanacheMongoEntity {
     public Set<InformacaoProduto> informacoes = new HashSet<>();
     public Set<PrecoProduto> precos = new HashSet<>();
 
-    public static Produto acharPorNome(String nome) {
-        return aBuscaNome(nome).firstResultOptional().orElse(new Produto());
+    public static Uni<Produto> acharPorNome(String nome) {
+        return aBuscaNome(nome).firstResult();
     }
 
-    public static List<Produto> acharTodosPorNome(String nome, int pagina, int tamanho) {
-        return aBuscaNome(nome).page(pagina, tamanho).stream().toList();
+    public static Uni<List<Produto>> acharTodosPorNome(String nome, int pagina, int tamanho) {
+        var q = aBuscaNome(nome).page(pagina, tamanho);
+        return q.list();
     }
 
-    public static List<Produto> acharTodos(int pagina, int tamanho) {
-        return aTodos().page(pagina, tamanho).stream().toList();
+    public static Uni<List<Produto>> acharTodos(int pagina, int tamanho) {
+        var q = aTodos().page(pagina, tamanho);
+        return q.list();
     }
 
-    private static PanacheQuery<Produto> aBuscaNome(String nome) {
+    private static ReactivePanacheQuery<Produto> aBuscaNome(String nome) {
         return find("nomesAlternativos = ?1 OR nome = ?2", nome, nome);
     }
 
-    public static PanacheQuery<Produto> aTodos() {
+    public static ReactivePanacheQuery<Produto> aTodos() {
         return findAll();
     }
 }

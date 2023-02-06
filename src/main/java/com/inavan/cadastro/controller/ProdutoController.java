@@ -5,6 +5,7 @@ import com.inavan.cadastro.dto.ProdutoComIdDto;
 import com.inavan.cadastro.dto.ProdutoDto;
 import com.inavan.cadastro.entidade.produto.Produto;
 import com.inavan.cadastro.service.ProdutoService;
+import io.smallrye.mutiny.Uni;
 
 import javax.ws.rs.*;
 import java.util.List;
@@ -18,24 +19,24 @@ public class ProdutoController {
     }
 
     @GET
-    public List<Produto> listar(@QueryParam("page") @DefaultValue("0") int pagina, @QueryParam("size") @DefaultValue("20") int tamanho) {
+    public Uni<List<Produto>> listar(@QueryParam("page") @DefaultValue("0") int pagina, @QueryParam("size") @DefaultValue("20") int tamanho) {
         return service.listar(pagina, tamanho);
     }
 
     @POST
-    public Produto incluirOuAtualizar(Produto dto) {
+    public Uni<?> incluirOuAtualizar(Produto dto) {
         return service.incluirOuAlterar(dto);
     }
 
     @GET
     @Path("/{id}")
-    public Produto ler(@PathParam("id") String id) {
+    public Uni<Produto> ler(@PathParam("id") String id) {
         return service.ler(id);
     }
 
     @PUT
     @Path("/{id}")
-    public Produto alterarPorId(@PathParam("id") String id, Produto dto) {
+    public Uni<?> alterarPorId(@PathParam("id") String id, Produto dto) {
         return service.alterar(id, dto);
     }
 
@@ -47,13 +48,13 @@ public class ProdutoController {
 
     @GET
     @Path("/nome/{nome}")
-    public List<Produto> listarPorNome(@PathParam("nome") String nome, @QueryParam("page") int pagina, @QueryParam("size") int tamanho) {
+    public Uni<List<Produto>> listarPorNome(@PathParam("nome") String nome, @QueryParam("page") int pagina, @QueryParam("size") int tamanho) {
         return service.lerPorNome(nome, pagina, tamanho);
     }
 
     @GET
     @Path("/so-nomes")
-    public List<ItemBuscaDto> listarTodosOsNomes() {
+    public Uni<List<ItemBuscaDto>> listarTodosOsNomes() {
         return service.listarTodosOsNomes();
     }
 }
